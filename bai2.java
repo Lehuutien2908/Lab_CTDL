@@ -1,38 +1,65 @@
-package bai1;
-
-import java.util.Arrays;
+package lab1;
 
 public class bai2 {
-	public static int[] getMissingValues(int[] arr) {
-		int[] missingValues = new int[arr.length];
-		int n = missingValues.length;
-		for (int i = 0; i < arr.length - 1; i++) {
-			if (!((arr[i] + (arr[i]+2)) / 2 == arr[i + 1])) {
-				missingValues[i + 1] = ((arr[i] + arr[i]+2) / 2);
+//	public static final char[] ALPHABET = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
+//			'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+	public char[] ALPHABET = new char[26];
+	private int n;
+
+	public bai2(int shiftSteps) {
+		this.n = shiftSteps;
+		createALPHABET();
+	}
+
+	private void createALPHABET() {
+		for (int i = 0; i < ALPHABET.length; i++) {
+			ALPHABET[i] = (char) ('A' + i);
+		}
+	}
+
+	public char encryptChar(char c) {
+		char res = ' ';
+		for (int i = 0; i < ALPHABET.length; i++) {
+			if (c == ALPHABET[i]) {
+				res = ALPHABET[(i + n) % 26];
 			}
 		}
-		for (int i = 0; i < n; i++) {
-			if (missingValues[i] == 0) {
-				for (int j = i; j < n - 1; j++) {
-					missingValues[j] = missingValues[j + 1];
-				}
-
-				i--;
-				n--;
-			}
-
-		}
-		int[] res = new int[n];
-		for (int i = 0; i < n; i++) {
-			res[i] = missingValues[i];
-		}
-
 		return res;
+	}
 
+	public String encrypt(String input) {
+		String res = "";
+		for (int i = 0; i < input.length(); i++) {
+			res += encryptChar(input.charAt(i));
+		}
+		return res;
+	}
+
+	public char decryptChar(char c) {
+		char res = ' ';
+		for (int i = 0; i < ALPHABET.length; i++) {
+			if (c == ALPHABET[i]) {
+				res = ALPHABET[(i - n + 26) % 26];
+			}
+		}
+		return res;
+	}
+
+	public String decrypt(String input) {
+		String res = "";
+		for (int i = 0; i < input.length(); i++) {
+			res += decryptChar(input.charAt(i));
+		}
+		return res;
 	}
 
 	public static void main(String[] args) {
-		int[] arr = { 11, 12, 13, 14, 16, 17, 19, 20, 22 };
-		System.out.println(Arrays.toString(getMissingValues(arr)));
+		int n = 3;
+		String s = "HELLO WORLD AZ";
+		bai2 b = new bai2(n);
+		System.out.println(b.encryptChar('K'));
+		System.out.println(b.encrypt(s));
+		System.out.println(b.decryptChar('K'));
+		System.out.println(b.decrypt(s));
 	}
 }

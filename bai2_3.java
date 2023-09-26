@@ -1,6 +1,6 @@
-package bai1;
+package lab1;
 
-public class maHoa {
+public class bai2_3 {
 	public static final char encryptChar(char c, int n) {
 //		char[]	ALPHABET = { 'A', 'B', 'C', 'D', 'E', 'F',
 //			'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
@@ -96,7 +96,7 @@ public class maHoa {
 			} else if (k >= 'a' && k <= 'z') {
 				for (int j = 0; j < alphabet.length; j++) {
 					if (alphabet[j] == k) {
-						res += alphabet[(j - n) % 26];
+						res += alphabet[(j - n + 26) % 26];
 					}
 				}
 			} else if (k == ' ') {
@@ -104,7 +104,7 @@ public class maHoa {
 			}
 			for (int j = 0; j < number.length; j++) {
 				if (number[j] == k) {
-					res += number[(j - n) % 10];
+					res += number[(j - n + 10) % 10];
 				}
 			}
 		}
@@ -113,11 +113,11 @@ public class maHoa {
 
 	public static void main(String[] args) {
 		char c = 'K';
-		String s = "Tien ngu 123";
+		String s = "Vipa proz 123";
 		System.out.println(encryptChar(c, 4));
-		System.out.println(decryptChar(encryptChar(c, 4), 4));
-		System.out.println(encryptString(s, 4));
-		System.out.println(dencryptString(encryptString(s, 4), 4));
+//		System.out.println(decryptChar(encryptChar(c, 4), 4));
+//		System.out.println(encryptString(s, 4));
+		System.out.println(dencryptString(s, 4));
 
 	}
 }
